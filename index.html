@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="描述">
+		<meta name="keywords" content="关键词">
+		<title>姜小D</title>
+		<link rel="shortcut icon" href="./static/images/1-jxd.ico" type="image/x-icon" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Cache" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<link rel="stylesheet" type="text/css" href="static/css/index.css"/>
+		<script type="text/javascript" src="static/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="static/js/jweixin-1.4.0.js"></script>
+		<script src="static/js/vue-2.5.17.js"></script>
+		<script>
+			function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {   //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        //alert(browser.versions.mobile);
+        if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //在微信中打开
+            }
+            if (ua.match(/WeiBo/i) == "weibo") {
+                //在新浪微博客户端打开
+            }
+            if (ua.match(/QQ/i) == "qq") {
+                //在QQ空间打开
+            }
+            if (browser.versions.ios) {
+                //是否在IOS浏览器打开
+            }
+            if(browser.versions.android){
+                //是否在安卓浏览器打开
+            }
+        } else {
+            //否则就是PC浏览器打开
+        }
+
+    </script>
+
+	</head>
+
+	<body class="body-home body-website" onselectstart="return false;">
+		<div class="header">
+			<div class="container">
+				<h1 class="logo">
+					<strong>
+						<a href="#"> <img src="static/images/2-logo.png" alt=""> </a>
+					</strong>
+				</h1>
+				<div class="primary-menus">
+					<ul class="selects">
+						<li class="current" data-target="baidu-search"><span>百度一下</span></li>
+						<!-- <li data-target="google-search"><span>Google搜索</span></li> -->
+						<!-- <li data-target="bing-search"><span>Bing搜索</span></li> -->
+						<!-- <li data-target="sogou-search"><span>微信·搜狗</span></li> -->
+						<!-- <li data-target="360-search"><span>360搜索</span></li> -->
+					</ul>
+					<div class="cont">
+						<div class="right-link">
+							<p class="main">
+								<p class="flipBox b1">
+									<img src="static/images/3-1.png">
+								</p>
+								<p class="flipBox b2">
+									<img src="static/images/3-2.png">
+								</p>
+							</p>
+						</div>
+						<div class="left-cont">
+							<form class="search" id="baidu-search" action="https://www.baidu.com/baidu" method="get" target="_blank">
+								<input type="text" name="wd" class="s" id="baiduInput" autocomplete="off">
+								<button type="submit" class="btn" id="baidu">百度一下</button>
+							</form>
+							<form class="search hidden" id="google-search" action="https://www.google.com/search" method="get" target="_blank">
+								<input type="text" name="q" class="s" id="googleInput" autocomplete="off">
+								<button type="submit" class="btn" id="google">Google</button>
+							</form>
+							<form class="search hidden" id="bing-search" action="https://cn.bing.com/search" method="get" target="_blank">
+								<input type="text" name="q" class="s" id="bing" autocomplete="off">
+								<button type="submit" class="btn" id="bingInput">Bing</button>
+							</form>
+							<form class="search hidden" id="sogou-search" action="https://weixin.sogou.com/weixin" method="get" target="_blank">
+								<input type="hidden" name="type" value="2" autocomplete="off">
+								<input type="text" name="query" class="s" id="sogouInput" autocomplete="off">
+								<button type="submit" class="btn" id="sogou">搜文章</button>
+							</form>
+							<form class="search hidden" id="360-search" action="https://www.so.com" method="get" target="_blank">
+								<input type="hidden" name="type" value="2" autocomplete="off">
+								<input type="text" name="query" class="s" id="360Input" autocomplete="off">
+								<button type="submit" class="btn" id="360">360搜索</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					
+					<!-- 左侧导航 开始  -->
+					<div class="col-md-1 sidebar" id="col-md-1">
+						<div class="content-sidebar dlBox" id="dlBox">
+							<dl id="dl">
+								<!-- 技术博客 -->
+								<dd><li><a href="#hot0" id="hotA0"><img class="dogNavImg showImg" src='static/picture/left-img/1.0-jsbk.png' index=0 alt="" /><img class="dogNavImg hideImg" src='static/picture/left-img/1.0-jsbk.png' index=0 alt="" /><span>技术博客</span></a></li></dd>
+								<!-- 在线课堂 -->
+								<dd><li><a href="#hot1" id="hotA1"><img class="dogNavImg showImg" src='static/picture/left-img/2.0-xxzy.png' index=0 alt="" /><img class="dogNavImg hideImg" src='static/picture/left-img/2.0-xxzy.png' index=0 alt="" /><span>在线课堂</span></a></li></dd>
+								<!-- 影视网站 -->
+								<dd><li><a href="#hot2" id="hotA2"><img class="dogNavImg showImg" src='static/picture/left-img/3-0-yszy.png' index=1 alt="" /><img class="dogNavImg hideImg" src='static/picture/left-img/3-0-yszy.png' index=1 alt="" /><span>影视网站</span></a></li></dd>
+								<!-- 影视搜索 -->
+								<dd><li><a href="#hot3" id="hotA3"><img class="dogNavImg showImg" src='static/picture/left-img/4-yyss.png' index=1 alt="" /><img class="dogNavImg hideImg" src='static/picture/left-img/4-yyss.png' index=1 alt="" /><span>音乐搜索</span></a></li></dd>
+								<!-- 前端资源 -->
+								<dd><li><a href="#hot4" id="hotA4"><img class="dogNavImg showImg" src='static/picture/left-img/5-htmlzy.png' index=1 alt="" /><img class="dogNavImg hideImg" src='static/picture/left-img/5-htmlzy.png' index=1 alt="" /><span>前端资源</span></a></li></dd>
+
+							</dl>
+						</div>
+					</div>
+					<!-- 左侧导航 结束 -->
+					
+					<!-- 右侧内容列表 开始 -->
+					<div class="col-md-11">
+						<!-- 右侧 <技术论坛> 开始 -->
+						<div class="part nav1">
+							<h2 id="hot0"><strong>技术论坛</strong><span> | [ 04 ]</span></h2>
+							<div class="items">
+								<div class="row">
+									<!-- 1、Github -->	<div class="col-xs-6 col-sm-4 col-md-2" title="GitHub brings together the world’s largest community"><div class="item"><a href="https://github.com/" target="_blank" alt="" rel="nofollow"><img src="static/picture/right-img/1-jsbk/1-github.png" alt=""><h3>Github</h3><p>GitHub brings together the world’s largest community</p></a></div></div>
+									<!-- 2、CSDN -->	<div class="col-xs-6 col-sm-4 col-md-2" title="CSDN是全球知名中文IT技术交流平台"><div class="item"><a href="https://www.csdn.net/" target="_blank" alt="" rel="nofollow"><img src="static/picture/right-img/1-jsbk/2-csdn.png" alt=""><h3>CSDN</h3><p>CSDN是全球知名中文IT技术交流平台</p></a></div></div>
+									<!-- 3、吾爱破解 -->	<div class="col-xs-6 col-sm-4 col-md-2" title="吾爱破解论坛致力于软件安全与病毒分析的前沿"><div class="item"><a href="https://www.52pojie.cn/" target="_blank" alt="" rel="nofollow"><img src="static/picture/right-img/1-jsbk/3-wapj.png" alt=""><h3>吾爱破解</h3><p>吾爱破解论坛致力于软件安全与病毒分析的前沿台</p></a></div></div>
+									<!-- 4、飘云阁 -->	<div class="col-xs-6 col-sm-4 col-md-2" title="飘云阁致力于软件安全,游戏外挂及病毒分析的前沿"><div class="item"><a href="https://www.chinapyg.com/" target="_blank" alt="" rel="nofollow"><img src="static/picture/right-img/1-jsbk/4-pyg.png" alt=""><h3>飘云阁</h3><p>飘云阁致力于软件安全,游戏外挂及病毒分析的前沿</p></a></div></div>
+								</div>
+							</div>
+						</div>
+						<!-- 右侧 <技术论坛> 结束-->
+						<!-- 右侧 <在线课堂> 开始-->
+						<div class="part nav1">
+							<h2 id="hot1"><strong>在线课堂</strong><span> | [ 02 ]</span></h2>
+							<div class="items">
+								<div class="row">
+									<!-- 1、php中文网--><div class="col-xs-6 col-sm-4 col-md-2" title="教程_手册_视频-免费php在线学习平台"><div class="item"><a href="https://www.php.cn/" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/2-zxkt/1-php中文网.png" alt="php中文网"><h3>php中文网</h3><p>教程_手册_视频-免费php在线学习平台</p></a></div></div>						
+									<!-- 1、网易云课堂--><div class="col-xs-6 col-sm-4 col-md-2" title="网易云课堂专注职业技能提升的在线学习平台"><div class="item"><a href="https://study.163.com/" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/2-zxkt/2-wyykt.png" alt=""><h3>网易云课堂</h3><p>网易云课堂专注职业技能提升的在线学习平台</p></a></div></div>						
+								</div>
+							</div>
+						</div>
+						<!-- 右侧 <影视网站> 开始 -->
+						<div class="part nav1">
+							<h2 id="hot2"><strong>影视网站</strong><span> | [ 01 ]</span></h2>
+							<div class="items">
+								<div class="row">
+									<!-- 1、虎牙一起看--><div class="col-xs-6 col-sm-4 col-md-2" title="虎牙直播提供一起看电影电视剧原创视频在线直播平台"><div class="item"><a href="https://www.huya.com/g/seeTogether" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/3-yswz/1-虎牙一起看.png" alt="虎牙一起看"><h3>虎牙一起看</h3><p>虎牙直播提供一起看电影电视剧原创视频在线直播平台</p></a></div></div>
+									
+								</div>
+							</div>
+						</div>
+						<!-- 右侧 <影视网站> 结束 -->
+						<!-- 右侧 <音乐搜索> 开始 -->
+						<div class="part nav1">
+							<h2 id="hot3"><strong>音乐搜索</strong><span> | [ 02 ]</span></h2>
+							<div class="items">
+								<div class="row">
+									<!-- 1、音乐聚合搜索--><div class="col-xs-6 col-sm-4 col-md-2" title="歌曲大全在线音乐播放器"><div class="item"><a href="http://www.gequdaquan.net/gqss/" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/4-yyss/1-yyjhss.png" alt=""><h3>音乐聚合搜索</h3><p>歌曲大全在线音乐播放器</p></a></div></div>
+									<!-- 1、疯狂音乐搜索--><div class="col-xs-6 col-sm-4 col-md-2" title="一站搜索试听各大音乐平台音乐"><div class="item"><a href="http://music.ifkdy.com/" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/4-yyss/2-fkyyss.png" alt=""><h3>疯狂音乐搜索</h3><p>一站搜索试听各大音乐平台音乐</p></a></div></div>
+									
+								</div>
+							</div>
+						</div>
+						<!-- 右侧 <音乐搜索> 结束 -->
+						<!-- 右侧 <前端资源> 开始 -->
+						<div class="part nav1">
+							<h2 id="hot4"><strong>前端资源</strong><span> | [ 01 ]</span></h2>
+							<div class="items">
+								<div class="row">
+									<!-- 1、html tricks--><div class="col-xs-6 col-sm-4 col-md-2" title="主要为广大html5开发者提供免费的html5开发教程"><div class="item"><a href="https://www.html5tricks.com/" target="_blank" alt="" rel="nofollow">	<img src="static/picture/right-img/5-qdzy/1-htmltricks.png" alt="虎牙一起看"><h3>html Tricks</h3><p>主要为广大html5开发者提供免费的html5开发教程</p></a></div></div>
+								</div>
+							</div>
+						</div>
+						<!--  xxxxxxx -->
+					</div>
+					<!-- 右侧内容 结束 -->
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="QRImg"> 手机底部显示二维码
+			<img src="static/images/wx.jpg" />
+			<p class="adQR"> 微信公众号</p>
+		</div> -->
+		<div class="footer">
+			<div class="container">
+				<p>
+					&#169 2020 北京青年-姜小D <br>
+					<strong>
+					<center>
+					<span id="showsectime" style="color:#FF0000;"></span>
+					<script type="text/javascript">
+					function NewDate(str) { 
+					str = str.split('-'); 
+					var date = new Date(); 
+					date.setUTCFullYear(str[0], str[1] - 1, str[2]); 
+					date.setUTCHours(0, 0, 0, 0); 
+					return date; 
+					} 
+					function showsectime() {
+					var birthDay =NewDate("2020-01-01");
+					var today=new Date();
+					var timeold=today.getTime()-birthDay.getTime();
+					var sectimeold=timeold/1000
+					var secondsold=Math.floor(sectimeold);
+					var msPerDay=24*60*60*1000; var e_daysold=timeold/msPerDay;
+					var daysold=Math.floor(e_daysold);
+					var e_hrsold=(daysold-e_daysold)*-24;
+					var hrsold=Math.floor(e_hrsold);
+					var e_minsold=(hrsold-e_hrsold)*-60;
+					var minsold=Math.floor((hrsold-e_hrsold)*-60); var seconds=Math.floor((minsold-e_minsold)*-60).toString();
+					document.getElementById("showsectime").innerHTML = "本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+					setTimeout(showsectime, 1000);
+					}showsectime();
+					</script>
+					</strong>
+				</p>
+				<p>
+					<!-- <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow">闽ICP备18024076号-2</a> -->
+				</p>
+			</div>
+		</div>
+		<div class='sideFixed'>
+			<div class="menu">
+				<img src="static/images/img_menu.png" />
+			</div>
+			<span class="sideSpan" id="sideSpanOne"></span>
+			<div class="imgNone question">
+				<p class="quesionP">QQ</p><p>扫码</p><img src="static/images/db-qq.png" />
+			</div>
+			<span class="sideSpan" id="sideSpanTwo"></span>
+			<div class="imgNone Qr">
+				<p class="quesionP">微信</p><p>扫码</p><img src="static/images/db-wx.png" />
+			</div>
+			<span class="sideSpan" id="sideSpanTwo"></span>
+
+			<span class="sideSpan" id="sideSpanThree"></span>
+			<div class="backTop">
+				<img src="static/images/img_addog_top2x.png" />
+			</div>
+
+			<div class="QR_code floatCode">
+				<img src="static/images/wx.jpg" /><span></span>
+			</div>
+			<div class="question_code floatCode">
+				<img src="static/images/qq.jpg" /><span></span>
+			</div>
+			
+		</div>
+		<div class="shade"></div>
+
+		<div class="tipsInfo">
+			<p>Welcome to the small station of JXD! 👨🏼‍💻</p>
+			<div class="prg-cont rad-prg" id="indicatorContainer2"></div>
+			<div class="imgBox">
+				<img class='closeImg' src="static/images/icon_addog_close2x.png" />
+			</div>
+		</div>
+
+		<div class="tipsPopup">
+			<p id="tipsPopupOne"></p></br>
+			<p id="tipsPopupTwo"></p>
+		</div>
+
+		<script type="text/javascript" src="static/js/base.js"></script>
+		<script type="text/javascript" src="static/js/radialindicator.js"></script>
+		<script type="text/javascript" src="static/js/jquery.qrcode.js"></script>
+		<script type="text/javascript" src="static/js/qrcode.js"></script>
+		<script type="text/javascript" src="static/js/iscroll-zoom.js"></script>
+		<script type="text/javascript" src="static/js/hammer.js"></script>
+		<script type="text/javascript" src="static/js/lrz.all.bundle.js"></script>
+		<script type="text/javascript" src="static/js/jquery.photoclip.js"></script>
+		<script type="text/javascript" src="static/js/iscroll.js"></script>		
+		<script type="text/javascript" src="static/js/index.js"></script>
+	</body>
+</html>
